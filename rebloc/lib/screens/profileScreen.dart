@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/utils/logger.dart';
 
+import 'achievementBoard.dart';
+
 class ProfileScreen extends StatelessWidget {
 
   @override
@@ -10,6 +12,22 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Profile'),
         ),
+        body: Expanded(child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Achievements'),
+              onPressed: () {
+                // Navigate to achievement board when tapped!
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AchievementBoardScreen()),
+                );
+              },
+            ),
+          ],
+        ),
+    ),
     );
   }
 }
