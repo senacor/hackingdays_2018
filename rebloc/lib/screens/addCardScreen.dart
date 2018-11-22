@@ -5,7 +5,6 @@ import 'package:hello_world/models/app_state.dart';
 import 'package:hello_world/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
 import '../utils/showError.dart';
-import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
 import 'package:hello_world/data/web_client.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -49,7 +48,7 @@ class AddCardScreen extends StatelessWidget {
       String cardNumber = await BarcodeScanner.scan();
       final card = await WebClient().addLoyaltyCard(cardNumber);
       dispatcher(AddedLoyaltyCardAction(card));
-      Navigator.of(context).pushReplacementNamed('/loyaltyCards');
+      Navigator.of(context).pushReplacementNamed('/mainScreen');
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
           showError(message: 'The user did not grant the camera permission!', scaffoldKey: _scaffoldKey);

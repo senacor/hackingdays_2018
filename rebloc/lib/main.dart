@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/addCardScreen.dart';
-import 'package:hello_world/screens/loyaltyCard_list.dart';
 import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
 import 'package:hello_world/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:hello_world/bloc/navigation_bloc.dart';
 import 'package:hello_world/screens/splash_screen.dart';
+
+import 'screens/mainScreen.dart';
 
 void main() => runApp(BetterYunarApp());
 
@@ -32,9 +33,9 @@ class BetterYunarApp extends StatelessWidget {
   MaterialPageRoute _onGenerateRoute(RouteSettings settings) {
     var path = settings.name.split('/');
 
-    if (path[1] == 'loyaltyCards') {
+    if (path[1] == 'mainScreen') {
       return new MaterialPageRoute<int>(
-        builder: (context) => LoyaltyCardListScreen(),
+        builder: (context) => MainScreen(),
         settings: settings,
       );
     }
