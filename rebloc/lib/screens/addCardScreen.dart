@@ -1,6 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
 import 'package:hello_world/models/app_state.dart';
 import 'package:hello_world/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';

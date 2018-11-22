@@ -18,7 +18,7 @@ class LoyaltyCardWidget extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.album),
             title: Text(loyaltyCard.name),
-            subtitle: Text('Das ist eine Loyalty Programm Karte'),
+            subtitle: Text(loyaltyCard.cardNumber),
           ),
           ButtonTheme.bar( // make buttons use the appropriate styles for cards
             child: ButtonBar(
