@@ -1,11 +1,16 @@
+import 'package:better_yunar/bloc/achievements_bloc.dart';
+import 'package:better_yunar/models/achievement.dart';
+import 'package:better_yunar/models/app_state.dart';
+import 'package:better_yunar/utils/dpi.dart';
+import 'package:better_yunar/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:rebloc/rebloc.dart';
-import 'package:better_yunar/models/app_state.dart';
-import 'package:better_yunar/utils/logger.dart';
-import 'package:better_yunar/models/achievement.dart';
-import 'package:better_yunar/bloc/achievements_bloc.dart';
 
-const imageBasePath = "assets/images/achievements/";
+String imageBasePath() {
+  return "https://api.dev1.thatisnomoon.io/static/achievements/images/" +
+      dpiName() +
+      "/";
+}
 
 typedef AchievementTapCallback = void Function(Achievement achievement);
 
@@ -58,7 +63,7 @@ Widget buildAchievementGrid(achievements) {
       crossAxisCount: 2,
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 0.0,
-      childAspectRatio: 1.4,
+      childAspectRatio: 1.2,
       children: _buildGridTileList(achievements)
   );
 }
@@ -89,18 +94,18 @@ class AchievementGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var imageSrc = imageBasePath + (achievement.gained
-        ? achievement.achievementTypeId + "_preview.jpg"
-        : "ungained_preview.png");
+    var imageSrc = (achievement.gained
+        ? achievement.previewImageUrl
+        : imageBasePath() + "ungained_preview.png");
 
     var image = new ClipRRect(
         borderRadius: new BorderRadius.circular(10.0),
-          child: Image.asset(
+        child: Image.network(
             imageSrc,
             fit: BoxFit.cover,
-          ),
-        );
-
+            filterQuality: FilterQuality.high,
+        ),
+    );
 
     return GridTile(
         child: GestureDetector(
