@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hello_world/models/app_state.dart';
 import 'package:hello_world/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
+import '../bloc/loayaltyCard_bloc.dart';
 import '../utils/showError.dart';
 import 'package:hello_world/data/web_client.dart';
 
