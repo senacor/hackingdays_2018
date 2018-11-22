@@ -4,10 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:better_yunar/models/app_state.dart';
 import 'package:better_yunar/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
-import '../bloc/loayaltyCard_bloc.dart';
-import '../utils/showError.dart';
-import 'package:better_yunar/data/web_client.dart';
 import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
+import 'package:better_yunar/utils/showError.dart';
+import 'package:better_yunar/data/web_client.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 

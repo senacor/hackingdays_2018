@@ -35,6 +35,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       serializers.serialize(object.loyaltyCards,
           specifiedType: const FullType(BuiltMap,
               const [const FullType(String), const FullType(LoyaltyCard)])),
+      'achievements',
+      serializers.serialize(object.achievements,
+          specifiedType: const FullType(BuiltMap,
+              const [const FullType(String), const FullType(Achievement)])),
       'onboarding',
       serializers.serialize(object.onboarding,
           specifiedType: const FullType(Onboarding)),
@@ -67,6 +71,13 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
                 const FullType(LoyaltyCard)
               ])) as BuiltMap);
           break;
+        case 'achievements':
+          result.achievements.replace(serializers.deserialize(value,
+              specifiedType: const FullType(BuiltMap, const [
+                const FullType(String),
+                const FullType(Achievement)
+              ])) as BuiltMap);
+          break;
         case 'user':
           result.user.replace(serializers.deserialize(value,
               specifiedType: const FullType(User)) as User);
@@ -86,6 +97,8 @@ class _$AppState extends AppState {
   @override
   final BuiltMap<String, LoyaltyCard> loyaltyCards;
   @override
+  final BuiltMap<String, Achievement> achievements;
+  @override
   final User user;
   @override
   final Onboarding onboarding;
@@ -93,9 +106,14 @@ class _$AppState extends AppState {
   factory _$AppState([void updates(AppStateBuilder b)]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.loyaltyCards, this.user, this.onboarding}) : super._() {
+  _$AppState._(
+      {this.loyaltyCards, this.achievements, this.user, this.onboarding})
+      : super._() {
     if (loyaltyCards == null) {
       throw new BuiltValueNullFieldError('AppState', 'loyaltyCards');
+    }
+    if (achievements == null) {
+      throw new BuiltValueNullFieldError('AppState', 'achievements');
     }
     if (onboarding == null) {
       throw new BuiltValueNullFieldError('AppState', 'onboarding');
@@ -114,13 +132,16 @@ class _$AppState extends AppState {
     if (identical(other, this)) return true;
     return other is AppState &&
         loyaltyCards == other.loyaltyCards &&
+        achievements == other.achievements &&
         user == other.user &&
         onboarding == other.onboarding;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, loyaltyCards.hashCode), user.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, loyaltyCards.hashCode), achievements.hashCode),
+            user.hashCode),
         onboarding.hashCode));
   }
 
@@ -128,6 +149,7 @@ class _$AppState extends AppState {
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
           ..add('loyaltyCards', loyaltyCards)
+          ..add('achievements', achievements)
           ..add('user', user)
           ..add('onboarding', onboarding))
         .toString();
@@ -142,6 +164,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._loyaltyCards ??= new MapBuilder<String, LoyaltyCard>();
   set loyaltyCards(MapBuilder<String, LoyaltyCard> loyaltyCards) =>
       _$this._loyaltyCards = loyaltyCards;
+
+  MapBuilder<String, Achievement> _achievements;
+  MapBuilder<String, Achievement> get achievements =>
+      _$this._achievements ??= new MapBuilder<String, Achievement>();
+  set achievements(MapBuilder<String, Achievement> achievements) =>
+      _$this._achievements = achievements;
 
   UserBuilder _user;
   UserBuilder get user => _$this._user ??= new UserBuilder();
@@ -158,6 +186,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   AppStateBuilder get _$this {
     if (_$v != null) {
       _loyaltyCards = _$v.loyaltyCards?.toBuilder();
+      _achievements = _$v.achievements?.toBuilder();
       _user = _$v.user?.toBuilder();
       _onboarding = _$v.onboarding?.toBuilder();
       _$v = null;
@@ -185,6 +214,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$result = _$v ??
           new _$AppState._(
               loyaltyCards: loyaltyCards.build(),
+              achievements: achievements.build(),
               user: _user?.build(),
               onboarding: onboarding.build());
     } catch (_) {
@@ -192,6 +222,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       try {
         _$failedField = 'loyaltyCards';
         loyaltyCards.build();
+        _$failedField = 'achievements';
+        achievements.build();
         _$failedField = 'user';
         _user?.build();
         _$failedField = 'onboarding';

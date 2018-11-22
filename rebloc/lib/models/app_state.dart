@@ -4,6 +4,7 @@ import 'package:built_value/serializer.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/models/user.dart';
 import 'package:better_yunar/models/onboarding.dart';
+import 'package:better_yunar/models/achievement.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 part 'app_state.g.dart';
@@ -11,9 +12,8 @@ part 'app_state.g.dart';
 abstract class AppState implements Built<AppState, AppStateBuilder> {
   static Serializer<AppState> get serializer => _$appStateSerializer;
 
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  String _firebaseToken;
   BuiltMap<String, LoyaltyCard> get loyaltyCards;
+  BuiltMap<String, Achievement> get achievements;
   @nullable
   User get user;
   Onboarding get onboarding;
@@ -22,7 +22,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   factory AppState.initialState() {
     final AppState result = AppState();
-    final FirebaseMessaging _firebaseMessaging = result._firebaseMessaging;
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -50,7 +50,6 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
     _firebaseMessaging.getToken().then((String token) {
           assert (token != null);
           print("Token received: $token");
-          result._firebaseToken = token;
         }
     );
 

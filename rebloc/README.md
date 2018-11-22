@@ -6,3 +6,9 @@ A new Flutter project.
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
+
+## Code generation for model files
+
+```
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```

@@ -16,7 +16,8 @@ class WebClient {
   static const password = "jR,vV,HGLVerJ`DVfhg^PFj)64Z7pn5dvw[.]Cge;fL>rmg|s#mVgVd%cMpQE\$Kw";
   final authorizationEndpoint = Uri.parse("https://api.dev1.thatisnomoon.io/auth/token");
   final loyaltyCardsUrl = Uri.parse("https://api.dev1.thatisnomoon.io/loyalty/cards");
-  static const headers = { "x-api-key": "a524ae84-c799-4975-8ab1-9b07b5a28922" };
+  static const apiKey = "a524ae84-c799-4975-8ab1-9b07b5a28922";
+  static const headers = { "x-api-key": apiKey };
   static const _requestTimeoutDuration = Duration(seconds: 10);
   static const maxAttempts = 3;
 
@@ -31,25 +32,33 @@ class WebClient {
     return _instance;
   }
 
-  Future<Client> authenticated() async {
-    if(client == null) {
-      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, headers: headers );
-    }
-    return client;
+  Future<http.Response> get(Uri url, {Map<String, String> headers}) async {
+    return _makeRequest(url, headers: headers);
   }
 
-  Future<http.Response> _makeRequest(String url) async {
-    if(client == null) {
-      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, headers: headers );
+  Future<http.Response> _makeRequest(Uri url, {Map<String, String> headers}) async {
+    if (client == null) {
+      log.info("auth for request $url");
+      client = await oauth.resourceOwnerPasswordGrant(
+          authorizationEndpoint, username, password, identifier: "ambidexter",
+          basicAuth: false,
+          headers: { "x-api-key": apiKey });
     }
 
     int attempts = 0;
     http.Response response;
 
+    if (headers == null) {
+      headers = {};
+    }
+
+    headers.putIfAbsent("x-api-key", () => apiKey);
+
     do {
       attempts++;
 
-      response = await client.get(loyaltyCardsUrl, headers: { "x-api-key": "a524ae84-c799-4975-8ab1-9b07b5a28922" })
+      log.info("GET $url");
+      response = await client.get(url, headers: headers)
         .timeout(_requestTimeoutDuration)
         .catchError((_) {
           String msg = 'Timed out requesting $url.';
@@ -61,7 +70,7 @@ class WebClient {
   }
 
   Future<BuiltList<LoyaltyCard>> fetchCards() async {
-    final response = await _makeRequest('https://api.dev1.thatisnomoon.io/loyalty/cards');
+    final response = await _makeRequest(loyaltyCardsUrl);
 
     if (response.statusCode != 200) {
       final msg = 'Failed to fetch cards, status: ${response.statusCode}';
@@ -77,6 +86,13 @@ class WebClient {
     );
 
     return deserialized;
+  }
+
+  Future<Client> authenticated() async {
+    if(client == null) {
+      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, headers: headers );
+    }
+    return client;
   }
 
   Future<LoyaltyCard> addLoyaltyCard(cardNumber) async {

@@ -20,6 +20,7 @@ part of serializers;
 // ignore_for_file: test_types_in_equals
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Achievement.serializer)
       ..add(AppState.serializer)
       ..add(LoyaltyCard.serializer)
       ..add(Onboarding.serializer)
@@ -27,5 +28,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(LoyaltyCard)]),
-          () => new MapBuilder<String, LoyaltyCard>()))
+          () => new MapBuilder<String, LoyaltyCard>())
+      ..addBuilderFactory(
+          const FullType(BuiltMap,
+              const [const FullType(String), const FullType(Achievement)]),
+          () => new MapBuilder<String, Achievement>()))
     .build();
