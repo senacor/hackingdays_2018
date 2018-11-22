@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/screens/addCardScreen.dart';
-import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
-import 'package:hello_world/models/app_state.dart';
+import 'package:better_yunar/screens/addCardScreen.dart';
+import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
+import 'package:better_yunar/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
-import 'package:hello_world/bloc/navigation_bloc.dart';
-import 'package:hello_world/screens/splash_screen.dart';
+import 'package:better_yunar/bloc/navigation_bloc.dart';
+import 'package:better_yunar/screens/splash_screen.dart';
+import 'package:better_yunar/screens/onboarding_screen.dart';
+import 'package:better_yunar/bloc/blocs.dart';
 
 import 'screens/mainScreen.dart';
 
@@ -18,12 +20,13 @@ class BetterYunarApp extends StatelessWidget {
   BetterYunarApp() {
     navBloc = NavigationBloc(navigatorKey);
 
+    var blocs = new List<Bloc<AppState>>();
+    createBlocs().forEach((element) => blocs.add(element));
+    blocs.add(navBloc);
+
     store = Store<AppState>(
       initialState: AppState.initialState(),
-      blocs: [
-        LoyaltyCardBloc(),
-        navBloc,
-      ],
+      blocs: blocs,
     );
 
     store.dispatcher(StartObservingNavigationAction());
@@ -47,6 +50,13 @@ class BetterYunarApp extends StatelessWidget {
       );
     }
 
+    if (path[1] == 'onboarding') {
+      return new MaterialPageRoute<int>(
+        builder: (context) => OnboardingScreen(),
+        settings: settings,
+      );
+    }
+
     return MaterialPageRoute(
       builder: (context) => SplashScreen(),
       settings: settings,
@@ -60,7 +70,8 @@ class BetterYunarApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Better Yunar',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          backgroundColor: Color.fromARGB(255, 99, 205, 218),
+          primaryColor: Color.fromARGB(255, 76, 81, 208),
         ),
         onGenerateRoute: _onGenerateRoute,
         navigatorObservers: [navBloc.observer],

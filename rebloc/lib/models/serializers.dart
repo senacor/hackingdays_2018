@@ -3,8 +3,10 @@ library serializers;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:hello_world/models/app_state.dart';
-import 'package:hello_world/models/loyaltyCard.dart';
+import 'package:better_yunar/models/app_state.dart';
+import 'package:better_yunar/models/loyaltyCard.dart';
+import 'package:better_yunar/models/onboarding.dart';
+import 'package:better_yunar/models/user.dart';
 
 part 'serializers.g.dart';
 

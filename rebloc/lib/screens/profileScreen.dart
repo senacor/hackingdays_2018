@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/utils/logger.dart';
+import 'package:better_yunar/utils/logger.dart';
 
 class ProfileScreen extends StatelessWidget {
 

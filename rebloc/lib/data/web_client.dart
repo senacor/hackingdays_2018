@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:built_collection/built_collection.dart';
-import 'package:hello_world/utils/logger.dart';
-import 'package:hello_world/models/loyaltyCard.dart';
+import 'package:better_yunar/utils/logger.dart';
+import 'package:better_yunar/models/loyaltyCard.dart';
 import 'dart:convert';
-import 'package:hello_world/models/serializers.dart';
+import 'package:better_yunar/models/serializers.dart';
 import 'package:oauth2/oauth2.dart' as oauth;
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hello_world/models/loyaltyCard.dart';
+import 'package:better_yunar/models/loyaltyCard.dart';
 
 class LoyaltyCardWidget extends StatelessWidget {
   final LoyaltyCard loyaltyCard;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rebloc/rebloc.dart';
-import 'package:hello_world/models/app_state.dart';
+import 'package:better_yunar/models/app_state.dart';
 
 class SplashScreenViewModel {
   bool readyToGo;
@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
           //TODO
           // Make this clever
           // Make sure the splash screen is shown at least a couple of seconds
-          Future.delayed(Duration(milliseconds: 1000), () => Navigator.of(context).pushReplacementNamed('/mainScreen'));
+          Future.delayed(Duration(milliseconds: 1000), () => Navigator.of(context).pushReplacementNamed('/onboarding'));
         }
       
         return Text('THAT IS A SPLASH SCREEN');

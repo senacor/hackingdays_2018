@@ -22,6 +22,8 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AppState.serializer)
       ..add(LoyaltyCard.serializer)
+      ..add(Onboarding.serializer)
+      ..add(User.serializer)
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(LoyaltyCard)]),

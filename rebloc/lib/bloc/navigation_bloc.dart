@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:hello_world/models/app_state.dart';
+import 'package:better_yunar/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 
 typedef void NewRouteCallback(Route<dynamic> route, Route<dynamic> previousRoute);

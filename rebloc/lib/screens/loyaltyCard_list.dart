@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/widgets/LoyaltyCard.dart';
-import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
-import 'package:hello_world/models/app_state.dart';
+import 'package:better_yunar/widgets/LoyaltyCard.dart';
+import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
+import 'package:better_yunar/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
-import 'package:hello_world/models/loyaltyCard.dart';
-import 'package:hello_world/utils/logger.dart';
+import 'package:better_yunar/models/loyaltyCard.dart';
+import 'package:better_yunar/utils/logger.dart';
 
 class LoyaltyCardListViewModel {
   final List<LoyaltyCard> loyaltyCards;

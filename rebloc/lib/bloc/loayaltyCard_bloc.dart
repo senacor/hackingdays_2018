@@ -1,7 +1,7 @@
 import 'package:rebloc/rebloc.dart';
-import 'package:hello_world/models/loyaltyCard.dart';
-import 'package:hello_world/data/loyaltyCard_repository.dart';
-import 'package:hello_world/models/app_state.dart';
+import 'package:better_yunar/models/loyaltyCard.dart';
+import 'package:better_yunar/data/loyaltyCard_repository.dart';
+import 'package:better_yunar/models/app_state.dart';
 
 class RefreshLoyaltyCardsAction extends Action {}
 
@@ -74,3 +74,7 @@ class LoyaltyCardBloc extends SimpleBloc<AppState> {
     return state;
   }
 }
+
+var blocs = [
+  LoyaltyCardBloc()
+];

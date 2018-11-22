@@ -1,11 +1,12 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hello_world/models/app_state.dart';
-import 'package:hello_world/screens/loyaltyCard_list.dart';
+import 'package:better_yunar/models/app_state.dart';
+import 'package:better_yunar/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
 import '../utils/showError.dart';
-import 'package:hello_world/data/web_client.dart';
+import 'package:better_yunar/data/web_client.dart';
+import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
