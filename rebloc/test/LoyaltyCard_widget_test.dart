@@ -9,22 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hello_world/main.dart';
+import 'package:hello_world/models/loyaltyCard.dart';
+import 'package:hello_world/widgets/LoyaltyCard.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    final LoyaltyCardBuilder builder = LoyaltyCardBuilder();
+    builder.name='Payback';
+    builder.cardId='54321';
+    builder.cardNumber='12345';
+    final LoyaltyCard loyaltyCard = builder.build();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(MaterialApp(home: LoyaltyCardWidget(loyaltyCard)));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Payback'), findsOneWidget);
+    expect(find.text('12345'), findsOneWidget);
+    expect(find.text('ZEIG MIR MEHR JUNGE'), findsOneWidget);
   });
 }
