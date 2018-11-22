@@ -8,6 +8,7 @@ abstract class LoyaltyCard implements Built<LoyaltyCard, LoyaltyCardBuilder> {
   static Serializer<LoyaltyCard> get serializer => _$loyaltyCardSerializer;
 
   static const listSerializationType = const FullType(BuiltList, [FullType(LoyaltyCard)]);
+  static const serializationType = const FullType(LoyaltyCard);
 
   String get name;
   String get cardId;

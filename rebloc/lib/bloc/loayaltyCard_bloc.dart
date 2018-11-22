@@ -11,7 +11,15 @@ class RefreshedLoyaltyCardsAction extends Action {
   RefreshedLoyaltyCardsAction(this.loyaltyCards);
 }
 
+class AddedLoyaltyCardAction extends Action {
+  final LoyaltyCard loyaltyCard;
+
+  AddedLoyaltyCardAction(this.loyaltyCard);
+}
+
 class RefreshLoyaltyCardFailedAction extends Action {}
+
+class AddedLoyaltyCardFailedAction extends Action {}
 
 class LoyaltyCardBloc extends SimpleBloc<AppState> {
   LoyaltyCardRepository repository;
@@ -39,6 +47,13 @@ class LoyaltyCardBloc extends SimpleBloc<AppState> {
     });
   }
 
+  AppState _addedLoyaltyCard(AppState state, AddedLoyaltyCardAction action) {
+    return state.rebuild((b) {
+      final LoyaltyCard loyaltyCard = action.loyaltyCard;
+      b.loyaltyCards[loyaltyCard.cardId] = loyaltyCard;
+    });
+  }
+
   @override
   Action middleware(dispatcher, state, action) {
     if (action is RefreshLoyaltyCardsAction) {
@@ -52,6 +67,8 @@ class LoyaltyCardBloc extends SimpleBloc<AppState> {
   AppState reducer(state, action) {
     if (action is RefreshedLoyaltyCardsAction) {
       return _refreshedLoyaltyCards(state, action);
+    } else if (action is AddedLoyaltyCardAction) {
+      return _addedLoyaltyCard(state, action);
     }
 
     return state;

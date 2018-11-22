@@ -50,7 +50,7 @@ class _LoyaltyCardListScreenState extends State<LoyaltyCardListScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-           Navigator.of(context).pop('new-loyalty-card');
+           Navigator.of(context).pushReplacementNamed('/addLoyaltyCard');
         },
         tooltip: 'Increment',
         child: new Icon(Icons.add),

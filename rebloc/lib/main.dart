@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/addCardScreen.dart';
 import 'package:hello_world/screens/loyaltyCard_list.dart';
 import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
 import 'package:hello_world/models/app_state.dart';
@@ -38,12 +39,19 @@ class BetterYunarApp extends StatelessWidget {
       );
     }
 
+    if (path[1] == 'addLoyaltyCard') {
+      return new MaterialPageRoute<int>(
+        builder: (context) => AddCardScreen(),
+        settings: settings,
+      );
+    }
+
     return MaterialPageRoute(
       builder: (context) => SplashScreen(),
       settings: settings,
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
