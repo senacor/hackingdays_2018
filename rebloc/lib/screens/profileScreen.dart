@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text('Profile'),
         ),
-        body: Expanded(child: Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
@@ -27,7 +27,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-    ),
     );
   }
 }
