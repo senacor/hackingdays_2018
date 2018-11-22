@@ -6,10 +6,14 @@ class LoyaltyCardRepository {
   WebClient webClient;
 
   LoyaltyCardRepository(){
-    webClient = WebClient();
+    webClient = WebClient.instance();
   }
 
   Future<BuiltList<LoyaltyCard>> loadLoyaltyCards() async {
     return await webClient.fetchCards();
+  }
+
+  Future<LoyaltyCard> addLoyaltyCard(cardNumber) async {
+    return await webClient.addLoyaltyCard(cardNumber);
   }
 }

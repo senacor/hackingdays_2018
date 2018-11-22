@@ -12,6 +12,7 @@ abstract class LoyaltyCard implements Built<LoyaltyCard, LoyaltyCardBuilder> {
 
   String get name;
   String get cardId;
+  String get cardNumber;
 
   LoyaltyCard._();
 

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:better_yunar/models/app_state.dart';
 import 'package:better_yunar/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
+import '../bloc/loayaltyCard_bloc.dart';
 import '../utils/showError.dart';
 import 'package:better_yunar/data/web_client.dart';
 import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
@@ -47,7 +48,7 @@ class AddCardScreen extends StatelessWidget {
   Future _scan(context, dispatcher) async {
     try {
       String cardNumber = await BarcodeScanner.scan();
-      final card = await WebClient().addLoyaltyCard(cardNumber);
+      final card = await WebClient.instance().addLoyaltyCard(cardNumber);
       dispatcher(AddedLoyaltyCardAction(card));
       Navigator.of(context).pushReplacementNamed('/mainScreen');
     } on PlatformException catch (e) {

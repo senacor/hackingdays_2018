@@ -7,6 +7,7 @@ import 'package:better_yunar/bloc/navigation_bloc.dart';
 import 'package:better_yunar/screens/splash_screen.dart';
 import 'package:better_yunar/screens/onboarding_screen.dart';
 import 'package:better_yunar/bloc/blocs.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screens/mainScreen.dart';
 

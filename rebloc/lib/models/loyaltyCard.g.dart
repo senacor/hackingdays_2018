@@ -36,6 +36,9 @@ class _$LoyaltyCardSerializer implements StructuredSerializer<LoyaltyCard> {
       'cardId',
       serializers.serialize(object.cardId,
           specifiedType: const FullType(String)),
+      'cardNumber',
+      serializers.serialize(object.cardNumber,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -60,6 +63,10 @@ class _$LoyaltyCardSerializer implements StructuredSerializer<LoyaltyCard> {
           result.cardId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'cardNumber':
+          result.cardNumber = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -72,16 +79,21 @@ class _$LoyaltyCard extends LoyaltyCard {
   final String name;
   @override
   final String cardId;
+  @override
+  final String cardNumber;
 
   factory _$LoyaltyCard([void updates(LoyaltyCardBuilder b)]) =>
       (new LoyaltyCardBuilder()..update(updates)).build();
 
-  _$LoyaltyCard._({this.name, this.cardId}) : super._() {
+  _$LoyaltyCard._({this.name, this.cardId, this.cardNumber}) : super._() {
     if (name == null) {
       throw new BuiltValueNullFieldError('LoyaltyCard', 'name');
     }
     if (cardId == null) {
       throw new BuiltValueNullFieldError('LoyaltyCard', 'cardId');
+    }
+    if (cardNumber == null) {
+      throw new BuiltValueNullFieldError('LoyaltyCard', 'cardNumber');
     }
   }
 
@@ -95,19 +107,24 @@ class _$LoyaltyCard extends LoyaltyCard {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is LoyaltyCard && name == other.name && cardId == other.cardId;
+    return other is LoyaltyCard &&
+        name == other.name &&
+        cardId == other.cardId &&
+        cardNumber == other.cardNumber;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), cardId.hashCode));
+    return $jf(
+        $jc($jc($jc(0, name.hashCode), cardId.hashCode), cardNumber.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('LoyaltyCard')
           ..add('name', name)
-          ..add('cardId', cardId))
+          ..add('cardId', cardId)
+          ..add('cardNumber', cardNumber))
         .toString();
   }
 }
@@ -123,12 +140,17 @@ class LoyaltyCardBuilder implements Builder<LoyaltyCard, LoyaltyCardBuilder> {
   String get cardId => _$this._cardId;
   set cardId(String cardId) => _$this._cardId = cardId;
 
+  String _cardNumber;
+  String get cardNumber => _$this._cardNumber;
+  set cardNumber(String cardNumber) => _$this._cardNumber = cardNumber;
+
   LoyaltyCardBuilder();
 
   LoyaltyCardBuilder get _$this {
     if (_$v != null) {
       _name = _$v.name;
       _cardId = _$v.cardId;
+      _cardNumber = _$v.cardNumber;
       _$v = null;
     }
     return this;
@@ -149,7 +171,8 @@ class LoyaltyCardBuilder implements Builder<LoyaltyCard, LoyaltyCardBuilder> {
 
   @override
   _$LoyaltyCard build() {
-    final _$result = _$v ?? new _$LoyaltyCard._(name: name, cardId: cardId);
+    final _$result = _$v ??
+        new _$LoyaltyCard._(name: name, cardId: cardId, cardNumber: cardNumber);
     replace(_$result);
     return _$result;
   }

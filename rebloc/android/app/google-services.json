@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "60026614851",
+    "firebase_url": "https://hackingdays-2018.firebaseio.com",
+    "project_id": "hackingdays-2018",
+    "storage_bucket": "hackingdays-2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60026614851:android:2afc2cbb2b4b3171",
+        "android_client_info": {
+          "package_name": "com.example.helloworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60026614851-9juqva670uhthls0kssgbkidukvtfjdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAitmnwIhaxZ59R1k8EIhYDIyALk775sFw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
