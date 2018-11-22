@@ -5,6 +5,7 @@ import 'package:hello_world/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:hello_world/bloc/navigation_bloc.dart';
 import 'package:hello_world/screens/splash_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screens/mainScreen.dart';
 
