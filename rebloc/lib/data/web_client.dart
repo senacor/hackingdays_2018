@@ -31,7 +31,7 @@ class WebClient {
     do {
       attempts++;
 
-      response = await client.get(loyaltyCardsUrl, headers: { "x-api-key": "" })
+      response = await client.get(loyaltyCardsUrl, headers: { "x-api-key": "a524ae84-c799-4975-8ab1-9b07b5a28922" })
         .timeout(_requestTimeoutDuration)
         .catchError((_) {
           String msg = 'Timed out requesting $url.';

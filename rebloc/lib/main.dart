@@ -4,6 +4,7 @@ import 'package:hello_world/bloc/loayaltyCard_bloc.dart';
 import 'package:hello_world/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:hello_world/bloc/navigation_bloc.dart';
+import 'package:hello_world/screens/splash_screen.dart';
 
 void main() => runApp(BetterYunarApp());
 
@@ -23,7 +24,24 @@ class BetterYunarApp extends StatelessWidget {
       ],
     );
 
+    store.dispatcher(StartObservingNavigationAction());
     store.dispatcher(RefreshLoyaltyCardsAction());
+  }
+
+  MaterialPageRoute _onGenerateRoute(RouteSettings settings) {
+    var path = settings.name.split('/');
+
+    if (path[1] == 'loyaltyCards') {
+      return new MaterialPageRoute<int>(
+        builder: (context) => LoyaltyCardListScreen(),
+        settings: settings,
+      );
+    }
+
+    return MaterialPageRoute(
+      builder: (context) => SplashScreen(),
+      settings: settings,
+    );
   }
   
   @override
@@ -35,10 +53,7 @@ class BetterYunarApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
-          builder: (context) => LoyaltyCardListScreen(),
-          settings: settings,
-        ),
+        onGenerateRoute: _onGenerateRoute,
         navigatorObservers: [navBloc.observer],
       ),
     );

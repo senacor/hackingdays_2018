@@ -6,8 +6,6 @@ import 'package:rebloc/rebloc.dart';
 import 'package:hello_world/models/loyaltyCard.dart';
 import 'package:hello_world/utils/logger.dart';
 
-const programs = ['Deutschland Card', 'Payback'];
-
 class LoyaltyCardListViewModel {
   final List<LoyaltyCard> loyaltyCards;
 
