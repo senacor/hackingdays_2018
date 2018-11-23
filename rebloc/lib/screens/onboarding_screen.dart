@@ -46,8 +46,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
         body: ViewModelSubscriber<AppState, _OnboardingScreenViewModel>(
       converter: (state) => _OnboardingScreenViewModel(
-          errorMessage: state.onboarding.onboardingRequestErrorMessage,
-          isRequestRunning: state.onboarding.isOnboardingRequestRunning),
+          errorMessage: state.onboardingScreen.onboardingRequestErrorMessage,
+          isRequestRunning: state.onboardingScreen.isOnboardingRequestRunning),
       builder: (context, dispatcher, viewModel) {
         void onButtonPressed() {
           dispatcher(UserOnboardingStarted(nickname: _nickname));

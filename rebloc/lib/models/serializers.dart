@@ -7,7 +7,7 @@ import 'package:better_yunar/models/app_state.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/models/achievement.dart';
 import 'package:better_yunar/models/onboardingResponse.dart';
-import 'package:better_yunar/models/onboarding.dart';
+import 'package:better_yunar/models/onboardingScreen.dart';
 
 part 'serializers.g.dart';
 
@@ -16,7 +16,7 @@ part 'serializers.g.dart';
   LoyaltyCard,
   Achievement,
   OnboardingResponse,
-  Onboarding
+  OnboardingScreen
 ])
 // built_value doesn't include serializers for lists of values by default, so
 // any lists that we need to directly fetch from the API or store locally need
