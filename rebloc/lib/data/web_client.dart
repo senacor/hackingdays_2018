@@ -42,7 +42,7 @@ class WebClient {
       client = await oauth.resourceOwnerPasswordGrant(
           authorizationEndpoint, username, password, identifier: "ambidexter",
           basicAuth: false,
-          headers: { "x-api-key": apiKey });
+          customHeaders: { "x-api-key": apiKey });
     }
 
     int attempts = 0;
@@ -90,14 +90,14 @@ class WebClient {
 
   Future<Client> authenticated() async {
     if(client == null) {
-      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, headers: headers );
+      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, customHeaders: headers );
     }
     return client;
   }
 
   Future<LoyaltyCard> addLoyaltyCard(cardNumber) async {
     if(client == null) {
-      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, headers: headers );
+      client = await oauth.resourceOwnerPasswordGrant(authorizationEndpoint, username, password, identifier: "ambidexter", basicAuth: false, customHeaders: headers );
     }
 
     var response = await client.post(loyaltyCardsUrl, headers: headers, body: _createBody(cardNumber));
