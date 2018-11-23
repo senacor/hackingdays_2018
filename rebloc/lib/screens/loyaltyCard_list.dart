@@ -5,6 +5,7 @@ import 'package:better_yunar/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/utils/logger.dart';
+import 'package:better_yunar/bloc/navigation_bloc.dart';
 
 class LoyaltyCardListViewModel {
   final List<LoyaltyCard> loyaltyCards;
@@ -23,15 +24,14 @@ class _LoyaltyCardListScreenState extends State<LoyaltyCardListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log.info("build");
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Alle Loyalty Karten Brudiii'),
-      ),
-      body: ViewModelSubscriber<AppState, LoyaltyCardListViewModel>(
-        converter: (state) => LoyaltyCardListViewModel(state),
-        builder: (context, dispatcher, viewModel) {
-          return RefreshIndicator(
+    return ViewModelSubscriber<AppState, LoyaltyCardListViewModel>(
+      converter: (state) => LoyaltyCardListViewModel(state),
+      builder: (context, dispatcher, viewModel) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Alle Loyalty Karten Brudiii'),
+          ),
+          body: RefreshIndicator(
             onRefresh: () {
               log.info('ON REFRESH');
               dispatcher(RefreshLoyaltyCardsAction());
@@ -45,16 +45,16 @@ class _LoyaltyCardListScreenState extends State<LoyaltyCardListScreen> {
               controller: controller,
               physics: PageScrollPhysics()
             )
-          );
-        }
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-           Navigator.of(context).pushReplacementNamed('/addLoyaltyCard');
-        },
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      )
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              dispatcher(PushNamedReplacementRouteAction('/addLoyaltyCard'));
+            },
+            tooltip: 'Increment',
+            child: new Icon(Icons.add),
+          )
+        );
+      }
     );
   }
 }

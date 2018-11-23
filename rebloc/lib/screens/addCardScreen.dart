@@ -5,6 +5,7 @@ import 'package:better_yunar/models/app_state.dart';
 import 'package:better_yunar/screens/loyaltyCard_list.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
+import 'package:better_yunar/bloc/navigation_bloc.dart';
 import 'package:better_yunar/utils/showError.dart';
 import 'package:better_yunar/data/web_client.dart';
 
@@ -49,7 +50,7 @@ class AddCardScreen extends StatelessWidget {
       String cardNumber = await BarcodeScanner.scan();
       final card = await WebClient.instance().addLoyaltyCard(cardNumber);
       dispatcher(AddedLoyaltyCardAction(card));
-      Navigator.of(context).pushReplacementNamed('/mainScreen');
+      dispatcher(PushNamedReplacementRouteAction('/mainScreen'));
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
           showError(message: 'The user did not grant the camera permission!', scaffoldKey: _scaffoldKey);
