@@ -37,7 +37,7 @@ class AddCardScreen extends StatelessWidget {
   List<Widget> _create(List<LoyaltyProgram> data, context, dispatcher) {
     return data
         .map((d) => InkWell(
-            onTap: () => _scan(context, dispatcher),
+            onTap: () => _scan(context, dispatcher, d.id),
             highlightColor: Colors.green,
             child: Card(
               child: ListTile(
@@ -75,10 +75,10 @@ class AddCardScreen extends StatelessWidget {
                 )));
   }
 
-  Future _scan(context, dispatcher) async {
+  Future _scan(programId, context, dispatcher) async {
     try {
       String cardNumber = await BarcodeScanner.scan();
-      final card = await WebClient.instance().addLoyaltyCard(cardNumber);
+      final card = await WebClient.instance().addLoyaltyCard(cardNumber, programId);
       dispatcher(AddedLoyaltyCardAction(card));
       Navigator.of(context).pushReplacementNamed('/mainScreen');
     } on PlatformException catch (e) {

@@ -13,7 +13,7 @@ class LoyaltyCardRepository {
     return await webClient.fetchCards();
   }
 
-  Future<LoyaltyCard> addLoyaltyCard(cardNumber) async {
-    return await webClient.addLoyaltyCard(cardNumber);
+  Future<LoyaltyCard> addLoyaltyCard(cardNumber, programId) async {
+    return await webClient.addLoyaltyCard(cardNumber, programId);
   }
 }
