@@ -7,59 +7,50 @@ import 'package:better_yunar/bloc/navigation_bloc.dart';
 import 'package:better_yunar/screens/splash_screen.dart';
 import 'package:better_yunar/screens/onboarding_screen.dart';
 import 'package:better_yunar/bloc/blocs.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screens/mainScreen.dart';
 
 void main() => runApp(BetterYunarApp());
 
 class BetterYunarApp extends StatelessWidget {
-  Store<AppState> store;
-  NavigationBloc navBloc;
-  final navigatorKey = GlobalKey<NavigatorState>();
+  final Store<AppState> store;
+  final NavigationBloc navBloc;
+  static final navigatorKey = GlobalKey<NavigatorState>();
 
-  BetterYunarApp() {
-    navBloc = NavigationBloc(navigatorKey);
+  BetterYunarApp()
+      : navBloc = NavigationBloc(navigatorKey),
+        store = Store<AppState>(
+          initialState: AppState.initialState(),
+          blocs: blocs,
+        ) {
 
-    var blocs = new List<Bloc<AppState>>();
+    var blocs = List<Bloc<AppState>>();
     createBlocs().forEach((element) => blocs.add(element));
     blocs.add(navBloc);
-
-    store = Store<AppState>(
-      initialState: AppState.initialState(),
-      blocs: blocs,
-    );
 
     store.dispatcher(StartObservingNavigationAction());
     store.dispatcher(RefreshLoyaltyCardsAction());
   }
 
+  Widget _route(String path) {
+    print(path);
+    switch (path) {
+      case 'mainScreen':
+        return MainScreen();
+      case 'addLoyaltyCard':
+        return AddCardScreen();
+      case 'onBoarding':
+        return OnboardingScreen();
+      case 'addCardScreen':
+        return AddCardScreen();
+      default:
+        return SplashScreen();
+    }
+  }
+
   MaterialPageRoute _onGenerateRoute(RouteSettings settings) {
-    var path = settings.name.split('/');
-
-    if (path[1] == 'mainScreen') {
-      return new MaterialPageRoute<int>(
-        builder: (context) => MainScreen(),
-        settings: settings,
-      );
-    }
-
-    if (path[1] == 'addLoyaltyCard') {
-      return new MaterialPageRoute<int>(
-        builder: (context) => AddCardScreen(),
-        settings: settings,
-      );
-    }
-
-    if (path[1] == 'onboarding') {
-      return new MaterialPageRoute<int>(
-        builder: (context) => OnboardingScreen(),
-        settings: settings,
-      );
-    }
-
-    return MaterialPageRoute(
-      builder: (context) => SplashScreen(),
+    return MaterialPageRoute<int>(
+      builder: (_) => _route(settings.name.split('/')[1]),
       settings: settings,
     );
   }
