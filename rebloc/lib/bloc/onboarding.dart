@@ -2,12 +2,15 @@ import 'dart:async';
 import 'package:rebloc/rebloc.dart';
 import '../models/app_state.dart';
 import 'package:better_yunar/actions/onboarding.dart';
+import 'package:better_yunar/data/web_client.dart';
 
 const registerUrl = 'https://api.dev1.thatisnomoon.io/onboarding';
 
 class UserOnboardingStartedBloc extends SimpleBloc<AppState> {
-  void _onboardUser({ String username, DispatchFunction dispatcher }) async {
-    // WebClient client = WebClient();
+  void _onboardUser({ String nickname, DispatchFunction dispatcher }) async {
+    WebClient client = WebClient.instance();
+    await client.onboard(nickname);
+
     // var body = json.encode({ 'nickname': username });
     // final response = await client.doNonJWTRequest(url: registerUrl, body: body);
     // if (response.statusCode != 201) {
@@ -22,7 +25,7 @@ class UserOnboardingStartedBloc extends SimpleBloc<AppState> {
   @override
     FutureOr<Action> middleware(DispatchFunction dispatcher, AppState state, Action action) {
       if (action is UserOnboardingStarted) {
-        _onboardUser(username: action.nickname, dispatcher: dispatcher);
+        _onboardUser(nickname: action.nickname, dispatcher: dispatcher);
       }
       return action;
     }

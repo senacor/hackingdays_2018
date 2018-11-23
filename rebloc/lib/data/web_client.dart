@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:built_collection/built_collection.dart';
 import 'package:better_yunar/utils/logger.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
-import 'dart:convert';
+import 'package:better_yunar/models/user.dart';
 import 'package:better_yunar/models/serializers.dart';
 import 'package:oauth2/oauth2.dart' as oauth;
 import 'package:oauth2/oauth2.dart';
@@ -67,6 +67,38 @@ class WebClient {
     } while (response.statusCode == 500 && attempts < maxAttempts);
 
     return response;
+  }
+
+  Future<User> onboard(String nickname) async {
+    int attempts = 0;
+    http.Response response;
+    const String url = 'https://api.dev1.thatisnomoon.io/onboarding';
+
+    do {
+      attempts++;
+
+      response = await http.post(url, body: json.encode({ 'nickname': username }), headers: headers)
+        .timeout(_requestTimeoutDuration)
+        .catchError((_) {
+          String msg = 'Something went wrong with $url.';
+          throw Exception(msg);
+        });
+    } while (response.statusCode == 500 && attempts < maxAttempts);
+
+    if (response.statusCode != 201) {
+      final msg = 'Failed to fetch cards, status: ${response.statusCode}';
+      throw Exception(msg);
+    }
+
+    log.info(response.body);
+
+    final parsedJson = json.decode(response.body);
+    final deserialized = serializers.deserialize(
+      parsedJson,
+      specifiedType: User.serializationType,
+    );
+
+    return deserialized;
   }
 
   Future<BuiltList<LoyaltyCard>> fetchCards() async {

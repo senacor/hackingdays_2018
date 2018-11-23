@@ -31,7 +31,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
   Iterable serialize(Serializers serializers, User object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'userId',
+      'onboardedUser.userId',
       serializers.serialize(object.userId,
           specifiedType: const FullType(String)),
       'username',
@@ -59,7 +59,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'userId':
+        case 'onboardedUser.userId':
           result.userId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;

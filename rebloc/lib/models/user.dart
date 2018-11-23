@@ -9,7 +9,8 @@ abstract class User implements Built<User, UserBuilder> {
 
   static const listSerializationType = const FullType(BuiltList, [FullType(User)]);
   static const serializationType = const FullType(User);
-
+  
+  @BuiltValueField(wireName: 'onboardedUser.userId')
   String get userId;
   String get username;
   String get password;
