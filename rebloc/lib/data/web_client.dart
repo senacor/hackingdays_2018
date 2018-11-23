@@ -5,6 +5,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:better_yunar/utils/logger.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/models/user.dart';
+import 'package:better_yunar/models/onboardingResponse.dart';
 import 'package:better_yunar/models/serializers.dart';
 import 'package:oauth2/oauth2.dart' as oauth;
 import 'package:oauth2/oauth2.dart';
@@ -69,7 +70,7 @@ class WebClient {
     return response;
   }
 
-  Future<User> onboard(String nickname) async {
+  Future<OnboardingResponse> onboard(String nickname) async {
     int attempts = 0;
     http.Response response;
     const String url = 'https://api.dev1.thatisnomoon.io/onboarding';
@@ -95,7 +96,7 @@ class WebClient {
     final parsedJson = json.decode(response.body);
     final deserialized = serializers.deserialize(
       parsedJson,
-      specifiedType: User.serializationType,
+      specifiedType: OnboardingResponse.serializationType,
     );
 
     return deserialized;

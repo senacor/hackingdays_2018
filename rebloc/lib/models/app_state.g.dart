@@ -79,8 +79,8 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
               ])) as BuiltMap);
           break;
         case 'user':
-          result.user.replace(serializers.deserialize(value,
-              specifiedType: const FullType(User)) as User);
+          result.user = serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User;
           break;
         case 'onboarding':
           result.onboarding.replace(serializers.deserialize(value,
@@ -165,6 +165,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set loyaltyCards(MapBuilder<String, LoyaltyCard> loyaltyCards) =>
       _$this._loyaltyCards = loyaltyCards;
 
+<<<<<<< HEAD
   MapBuilder<String, Achievement> _achievements;
   MapBuilder<String, Achievement> get achievements =>
       _$this._achievements ??= new MapBuilder<String, Achievement>();
@@ -174,6 +175,11 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   UserBuilder _user;
   UserBuilder get user => _$this._user ??= new UserBuilder();
   set user(UserBuilder user) => _$this._user = user;
+=======
+  User _user;
+  User get user => _$this._user;
+  set user(User user) => _$this._user = user;
+>>>>>>> Finished onboarding
 
   OnboardingBuilder _onboarding;
   OnboardingBuilder get onboarding =>
@@ -186,8 +192,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   AppStateBuilder get _$this {
     if (_$v != null) {
       _loyaltyCards = _$v.loyaltyCards?.toBuilder();
+<<<<<<< HEAD
       _achievements = _$v.achievements?.toBuilder();
       _user = _$v.user?.toBuilder();
+=======
+      _user = _$v.user;
+>>>>>>> Finished onboarding
       _onboarding = _$v.onboarding?.toBuilder();
       _$v = null;
     }
@@ -214,18 +224,26 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$result = _$v ??
           new _$AppState._(
               loyaltyCards: loyaltyCards.build(),
+<<<<<<< HEAD
               achievements: achievements.build(),
               user: _user?.build(),
+=======
+              user: user,
+>>>>>>> Finished onboarding
               onboarding: onboarding.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'loyaltyCards';
         loyaltyCards.build();
+<<<<<<< HEAD
         _$failedField = 'achievements';
         achievements.build();
         _$failedField = 'user';
         _user?.build();
+=======
+
+>>>>>>> Finished onboarding
         _$failedField = 'onboarding';
         onboarding.build();
       } catch (e) {

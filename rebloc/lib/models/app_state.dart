@@ -5,7 +5,6 @@ import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/models/user.dart';
 import 'package:better_yunar/models/onboarding.dart';
 import 'package:better_yunar/models/achievement.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 part 'app_state.g.dart';
 
