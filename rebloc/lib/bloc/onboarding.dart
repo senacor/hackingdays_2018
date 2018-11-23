@@ -14,6 +14,7 @@ class UserOnboardingStartedBloc extends SimpleBloc<AppState> {
   void _onboardUser({ String nickname, DispatchFunction dispatcher }) async {
     WebClient client = WebClient.instance();
     OnboardingResponse onboardingResponse = await client.onboard(nickname);
+    await client.initOauth(onboardingResponse.auth.username, onboardingResponse.auth.password);
 
     dispatcher(UserOnboarded(onboardingResponse: onboardingResponse));
   }
