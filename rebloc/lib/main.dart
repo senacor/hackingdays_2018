@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:better_yunar/screens/addCardScreen.dart';
-import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
-import 'package:better_yunar/models/app_state.dart';
-import 'package:rebloc/rebloc.dart';
-import 'package:better_yunar/bloc/navigation_bloc.dart';
-import 'package:better_yunar/screens/splash_screen.dart';
-import 'package:better_yunar/screens/onboarding_screen.dart';
 import 'package:better_yunar/bloc/blocs.dart';
+import 'package:better_yunar/bloc/loayaltyCard_bloc.dart';
+import 'package:better_yunar/bloc/navigation_bloc.dart';
+import 'package:better_yunar/data/firebase_holder.dart';
+import 'package:better_yunar/models/app_state.dart';
+import 'package:better_yunar/screens/achievementBoard.dart';
+import 'package:better_yunar/screens/addCardScreen.dart';
+import 'package:better_yunar/screens/onboarding_screen.dart';
+import 'package:better_yunar/screens/splash_screen.dart';
+import 'package:better_yunar/utils/logger.dart';
+import 'package:flutter/material.dart';
+import 'package:rebloc/rebloc.dart';
 
 import 'BetterPopupRoute.dart';
 import 'screens/achievementDetails.dart';
@@ -31,11 +34,14 @@ class BetterYunarApp extends StatelessWidget {
       blocs: blocs,
     );
 
+    FirebaseHolder.instance().setDispatcher(store.dispatcher);
     store.dispatcher(StartObservingNavigationAction());
     store.dispatcher(RefreshLoyaltyCardsAction());
   }
 
   Route _onGenerateRoute(RouteSettings settings) {
+    log.info("_onGenerateRoute: $settings");
+
     var path = settings.name.split('/');
 
     if (path[1] == 'mainScreen') {
@@ -48,6 +54,13 @@ class BetterYunarApp extends StatelessWidget {
     if (path[1] == 'achievements') {
       return new BetterPopupRoute<int>(
         builder: (context) => new AchievementDetails(achievementId: path[2]),
+        settings: settings,
+      );
+    }
+
+    if (path[1] == 'achievementBoard') {
+      return new MaterialPageRoute(
+        builder: (context) => AchievementBoardScreen(),
         settings: settings,
       );
     }
