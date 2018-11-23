@@ -29,7 +29,7 @@ class UserOnboardingStartedBloc extends SimpleBloc<AppState> {
     AppState reducer(AppState state, Action action) {
       if (action is UserOnboardingStarted) {
         return state.rebuild((builder) {
-          builder.onboarding.isOnboardingRequestRunning = true;
+          builder.onboardingScreen.isOnboardingRequestRunning = true;
         });
       }
       return state;
@@ -42,8 +42,8 @@ class UserOnboardingFailedBloc extends SimpleBloc<AppState> {
     AppState reducer(AppState state, Action action) {
       if (action is UserOnboardingFailed) {
         return state.rebuild((builder) {
-          builder.onboarding.isOnboardingRequestRunning = false;
-          builder.onboarding.onboardingRequestErrorMessage = action.failureReason;
+          builder.onboardingScreen.isOnboardingRequestRunning = false;
+          builder.onboardingScreen.onboardingRequestErrorMessage = action.failureReason;
         });
       }
       return state;
@@ -55,8 +55,8 @@ class UserOnboardingSucceededBlob extends SimpleBloc<AppState> {
     AppState reducer(AppState state, Action action) {
       if (action is UserOnboarded) {
         return state.rebuild((builder) {
-          builder.onboarding.isOnboardingRequestRunning = false;
-          builder.onboarding.onboardingRequestErrorMessage = null;
+          builder.onboardingScreen.isOnboardingRequestRunning = false;
+          builder.onboardingScreen.onboardingRequestErrorMessage = null;
 
           builder.user = User(
             nickname: action.onboardingResponse.onboardedUser.nickname,
