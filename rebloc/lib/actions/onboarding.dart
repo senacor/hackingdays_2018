@@ -1,4 +1,5 @@
 import 'package:rebloc/rebloc.dart';
+import 'package:better_yunar/models/onboardingResponse.dart';
 
 class UserOnboardingStarted extends Action {
   String nickname;
@@ -13,10 +14,7 @@ class UserOnboardingFailed extends Action {
 }
 
 class UserOnboarded extends Action {
-  String userId;
-  String username;
-  String password;
-  String nickname;
+  OnboardingResponse onboardingResponse;
 
-  UserOnboarded({ this.userId, this.username, this.password, this.nickname });
+  UserOnboarded({ this.onboardingResponse });
 }

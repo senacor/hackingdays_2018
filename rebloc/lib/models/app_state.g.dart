@@ -79,8 +79,8 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
               ])) as BuiltMap);
           break;
         case 'user':
-          result.user.replace(serializers.deserialize(value,
-              specifiedType: const FullType(User)) as User);
+          result.user = serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User;
           break;
         case 'onboarding':
           result.onboarding.replace(serializers.deserialize(value,
@@ -171,9 +171,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set achievements(MapBuilder<String, Achievement> achievements) =>
       _$this._achievements = achievements;
 
-  UserBuilder _user;
-  UserBuilder get user => _$this._user ??= new UserBuilder();
-  set user(UserBuilder user) => _$this._user = user;
+  User _user;
+  User get user => _$this._user;
+  set user(User user) => _$this._user = user;
 
   OnboardingBuilder _onboarding;
   OnboardingBuilder get onboarding =>
@@ -187,7 +187,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if (_$v != null) {
       _loyaltyCards = _$v.loyaltyCards?.toBuilder();
       _achievements = _$v.achievements?.toBuilder();
-      _user = _$v.user?.toBuilder();
+      _user = _$v.user;
       _onboarding = _$v.onboarding?.toBuilder();
       _$v = null;
     }
@@ -215,7 +215,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               loyaltyCards: loyaltyCards.build(),
               achievements: achievements.build(),
-              user: _user?.build(),
+              user: user,
               onboarding: onboarding.build());
     } catch (_) {
       String _$failedField;
@@ -224,8 +224,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         loyaltyCards.build();
         _$failedField = 'achievements';
         achievements.build();
-        _$failedField = 'user';
-        _user?.build();
+
         _$failedField = 'onboarding';
         onboarding.build();
       } catch (e) {

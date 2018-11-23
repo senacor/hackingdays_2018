@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:better_yunar/models/app_state.dart';
+import 'package:better_yunar/actions/onboarding.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _OnboardingScreenViewModel {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   bool _isTyping;
   FocusNode _focus = FocusNode();
+  String _nickname;
 
   @override
   void initState() {
@@ -33,12 +35,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     });
   }
 
-  void onSubmitted(_) {
-    // widget.register(_username);
-  }
-
-  void onButtonPressed() {
-    //  widget.register(_username);
+  void usernameChanged(String newUsername) {
+    setState(() {
+      _nickname = newUsername;
+    });
   }
 
   @override
@@ -48,7 +48,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       converter: (state) => _OnboardingScreenViewModel(
           errorMessage: state.onboarding.onboardingRequestErrorMessage,
           isRequestRunning: state.onboarding.isOnboardingRequestRunning),
-      builder: (context, dispatcher, viewModel) => GestureDetector(
+      builder: (context, dispatcher, viewModel) {
+        void onButtonPressed() {
+          dispatcher(UserOnboardingStarted(nickname: _nickname));
+        }
+
+        void onSubmitted(String nickname) {
+          dispatcher(UserOnboardingStarted(nickname: nickname));
+        }
+        
+        return GestureDetector(
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
@@ -69,6 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Container(
                     margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
                     child: TextField(
+                      onChanged: usernameChanged,
                       onSubmitted: onSubmitted,
                       focusNode: _focus,
                       enabled: !viewModel.isRequestRunning,
@@ -97,7 +107,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ],
               ),
             ),
-          ),
+          );
+        }
     ));
   }
 }

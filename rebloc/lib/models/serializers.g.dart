@@ -22,9 +22,11 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Achievement.serializer)
       ..add(AppState.serializer)
+      ..add(Auth.serializer)
       ..add(LoyaltyCard.serializer)
+      ..add(OnboardedUser.serializer)
       ..add(Onboarding.serializer)
-      ..add(User.serializer)
+      ..add(OnboardingResponse.serializer)
       ..addBuilderFactory(
           const FullType(BuiltMap,
               const [const FullType(String), const FullType(LoyaltyCard)]),
