@@ -4,8 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:built_collection/built_collection.dart';
 import 'package:better_yunar/utils/logger.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
+import 'package:better_yunar/models/user.dart';
 import 'package:better_yunar/models/onboardingResponse.dart';
 import 'package:better_yunar/models/serializers.dart';
+import 'package:better_yunar/models/password.dart';
 import 'package:oauth2/oauth2.dart' as oauth;
 
 
@@ -19,6 +21,7 @@ class WebClient {
   static const maxAttempts = 3;
 
   var client;
+  String userId;
 
   WebClient._internal();
 
@@ -33,7 +36,9 @@ class WebClient {
     return _makeRequest(url, headers: headers);
   }
 
-  void initOauth(username, password) async {
+  void initOauth(username, password, userId) async {
+    this.userId = userId;
+
     client = await oauth.resourceOwnerPasswordGrant(
       authorizationEndpoint,
       username,
@@ -134,6 +139,42 @@ class WebClient {
     final deserialized = serializers.deserialize(
       parsedJson,
       specifiedType: LoyaltyCard.serializationType,
+    );
+
+    return deserialized;
+  }
+
+  Future<Password> register(mailaddress, password) async {
+    final registrationUrl = Uri.parse("https://api.dev1.thatisnomoon.io/users/$userId/registration");
+
+    var response = await client.post(registrationUrl, body: json.encode({"mailAddress": mailaddress, "password": password}), headers: headers);
+
+    if(response.statusCode != 204) {
+      throw 'Could not register user - Status: ${response.statusCode}';
+    }
+
+    final parsedJson = json.decode(response.body);
+    final deserialized = serializers.deserialize(
+      parsedJson,
+      specifiedType: Password.serializationType,
+    );
+
+    return deserialized;
+  }
+
+  Future<User> getMe() async {
+    final getMeUrl = Uri.parse("https://api.dev1.thatisnomoon.io/users/me");
+
+    var response = await client.get(getMeUrl, headers: headers);
+
+    if(response.statusCode != 200) {
+      throw 'Could not register user - Status: ${response.statusCode}';
+    }
+
+    final parsedJson = json.decode(response.body);
+    final deserialized = serializers.deserialize(
+      parsedJson['user'],
+      specifiedType: User.serializationType,
     );
 
     return deserialized;

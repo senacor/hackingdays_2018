@@ -14,7 +14,7 @@ class UserOnboardingStartedBloc extends SimpleBloc<AppState> {
   void _onboardUser({ String nickname, DispatchFunction dispatcher }) async {
     WebClient client = WebClient.instance();
     OnboardingResponse onboardingResponse = await client.onboard(nickname);
-    await client.initOauth(onboardingResponse.auth.username, onboardingResponse.auth.password);
+    await client.initOauth(onboardingResponse.auth.username, onboardingResponse.auth.password, onboardingResponse.onboardedUser.userId);
 
     dispatcher(UserOnboarded(onboardingResponse: onboardingResponse));
   }
@@ -59,12 +59,10 @@ class UserOnboardingSucceededBlob extends SimpleBloc<AppState> {
           builder.onboardingScreen.isOnboardingRequestRunning = false;
           builder.onboardingScreen.onboardingRequestErrorMessage = null;
 
-          builder.user = User(
-            nickname: action.onboardingResponse.onboardedUser.nickname,
-            userId: action.onboardingResponse.onboardedUser.userId,
-            username: action.onboardingResponse.auth.username,
-            password: action.onboardingResponse.auth.password,
-          );
+          builder.user.userId = action.onboardingResponse.onboardedUser.userId;
+          builder.user.username = action.onboardingResponse.auth.username;
+          builder.user.password = action.onboardingResponse.auth.password;
+          builder.user.nickname = action.onboardingResponse.onboardedUser.nickname;
         });
       }
       return state;

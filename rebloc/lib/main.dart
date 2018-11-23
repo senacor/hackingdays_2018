@@ -6,8 +6,8 @@ import 'package:rebloc/rebloc.dart';
 import 'package:better_yunar/bloc/navigation_bloc.dart';
 import 'package:better_yunar/screens/splash_screen.dart';
 import 'package:better_yunar/screens/onboarding_screen.dart';
+import 'package:better_yunar/screens/waitforVerification_screen.dart';
 import 'package:better_yunar/bloc/blocs.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'screens/mainScreen.dart';
 
@@ -54,6 +54,13 @@ class BetterYunarApp extends StatelessWidget {
     if (path[1] == 'onboarding') {
       return new MaterialPageRoute<int>(
         builder: (context) => OnboardingScreen(),
+        settings: settings,
+      );
+    }
+
+    if(path[1] == 'waitForVerification') {
+      return new MaterialPageRoute<int>(
+        builder: (context) => WaitForVerificationScreen(),
         settings: settings,
       );
     }

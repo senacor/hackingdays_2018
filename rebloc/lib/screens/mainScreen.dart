@@ -20,7 +20,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log.info("build");
     return DefaultTabController(
         length: choices.length,
         child: Scaffold(

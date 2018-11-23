@@ -79,8 +79,8 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
               ])) as BuiltMap);
           break;
         case 'user':
-          result.user = serializers.deserialize(value,
-              specifiedType: const FullType(User)) as User;
+          result.user.replace(serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User);
           break;
         case 'onboardingScreen':
           result.onboardingScreen.replace(serializers.deserialize(value,
@@ -172,9 +172,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set achievements(MapBuilder<String, Achievement> achievements) =>
       _$this._achievements = achievements;
 
-  User _user;
-  User get user => _$this._user;
-  set user(User user) => _$this._user = user;
+  UserBuilder _user;
+  UserBuilder get user => _$this._user ??= new UserBuilder();
+  set user(UserBuilder user) => _$this._user = user;
 
   OnboardingScreenBuilder _onboardingScreen;
   OnboardingScreenBuilder get onboardingScreen =>
@@ -188,7 +188,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if (_$v != null) {
       _loyaltyCards = _$v.loyaltyCards?.toBuilder();
       _achievements = _$v.achievements?.toBuilder();
-      _user = _$v.user;
+      _user = _$v.user?.toBuilder();
       _onboardingScreen = _$v.onboardingScreen?.toBuilder();
       _$v = null;
     }
@@ -216,7 +216,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               loyaltyCards: loyaltyCards.build(),
               achievements: achievements.build(),
-              user: user,
+              user: _user?.build(),
               onboardingScreen: onboardingScreen.build());
     } catch (_) {
       String _$failedField;
@@ -225,7 +225,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         loyaltyCards.build();
         _$failedField = 'achievements';
         achievements.build();
-
+        _$failedField = 'user';
+        _user?.build();
         _$failedField = 'onboardingScreen';
         onboardingScreen.build();
       } catch (e) {

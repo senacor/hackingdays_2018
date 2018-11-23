@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:better_yunar/utils/logger.dart';
-
-import 'achievementBoard.dart';
+import 'package:better_yunar/screens/achievementBoard.dart';
+import 'package:better_yunar/screens/registration.dart';
 
 class ProfileScreen extends StatelessWidget {
 
@@ -22,6 +22,17 @@ class ProfileScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => AchievementBoardScreen()),
+                );
+              },
+            ),
+
+            RaisedButton(
+              child: Text('Register'),
+              onPressed: () {
+                // Navigate to achievement board when tapped!
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegistrationScreen()),
                 );
               },
             ),
