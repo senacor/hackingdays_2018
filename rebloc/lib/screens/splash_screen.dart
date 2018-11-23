@@ -6,7 +6,7 @@ class SplashScreenViewModel {
   bool readyToGo;
 
   SplashScreenViewModel(AppState state)
-    : readyToGo = state.loyaltyCards.length > 0;
+    : readyToGo = true;
 }
 
 class SplashScreen extends StatelessWidget {

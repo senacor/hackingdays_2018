@@ -34,26 +34,28 @@ class _AchievementBoardScreenState extends State<AchievementBoardScreen> {
         title: Text("Achievements"),
         centerTitle: true,
       ),
-      body: ViewModelSubscriber<AppState, AchievementListViewModel>(
-          converter: (state) => AchievementListViewModel(state),
-          builder: (context, dispatcher, viewModel) {
-            if (viewModel.achievements == null || viewModel.achievements.length == 0) {
-              dispatcher(RefreshAchievementsAction());
-              return Center(
-                  child: CircularProgressIndicator()
-              );
-            } else {
-              return RefreshIndicator(
-                  onRefresh: () {
-                    log.info('ON REFRESH');
-                    dispatcher(RefreshAchievementsAction());
-                    return Future.value("");
-                  },
-                  child: buildAchievementGrid(viewModel.achievements)
-              );
+      body: FirstBuildDispatcher<AppState>(
+        action: RefreshAchievementsAction(),
+        child: ViewModelSubscriber<AppState, AchievementListViewModel>(
+            converter: (state) => AchievementListViewModel(state),
+            builder: (context, dispatcher, viewModel) {
+              if (viewModel.achievements == null || viewModel.achievements.length == 0) {
+                return Center(
+                    child: CircularProgressIndicator()
+                );
+              } else {
+                return RefreshIndicator(
+                    onRefresh: () {
+                      log.info('ON REFRESH');
+                      dispatcher(RefreshAchievementsAction());
+                      return Future.value("");
+                    },
+                    child: buildAchievementGrid(viewModel.achievements)
+                );
+              }
             }
-          }
-      )
+        )
+      ),
     );
   }
 }
@@ -61,8 +63,8 @@ class _AchievementBoardScreenState extends State<AchievementBoardScreen> {
 Widget buildAchievementGrid(achievements) {
   return GridView.count(
       crossAxisCount: 2,
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 0.0,
+      mainAxisSpacing: 6.0,
+      crossAxisSpacing: 6.0,
       childAspectRatio: 1.2,
       children: _buildGridTileList(achievements)
   );

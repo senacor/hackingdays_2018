@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'onboarding.dart';
+part of 'onboardingScreen.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -19,16 +19,18 @@ part of 'onboarding.dart';
 // ignore_for_file: unnecessary_new
 // ignore_for_file: test_types_in_equals
 
-Serializer<Onboarding> _$onboardingSerializer = new _$OnboardingSerializer();
+Serializer<OnboardingScreen> _$onboardingScreenSerializer =
+    new _$OnboardingScreenSerializer();
 
-class _$OnboardingSerializer implements StructuredSerializer<Onboarding> {
+class _$OnboardingScreenSerializer
+    implements StructuredSerializer<OnboardingScreen> {
   @override
-  final Iterable<Type> types = const [Onboarding, _$Onboarding];
+  final Iterable<Type> types = const [OnboardingScreen, _$OnboardingScreen];
   @override
-  final String wireName = 'Onboarding';
+  final String wireName = 'OnboardingScreen';
 
   @override
-  Iterable serialize(Serializers serializers, Onboarding object,
+  Iterable serialize(Serializers serializers, OnboardingScreen object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'isOnboardingRequestRunning',
@@ -46,9 +48,9 @@ class _$OnboardingSerializer implements StructuredSerializer<Onboarding> {
   }
 
   @override
-  Onboarding deserialize(Serializers serializers, Iterable serialized,
+  OnboardingScreen deserialize(Serializers serializers, Iterable serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new OnboardingBuilder();
+    final result = new OnboardingScreenBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -71,35 +73,37 @@ class _$OnboardingSerializer implements StructuredSerializer<Onboarding> {
   }
 }
 
-class _$Onboarding extends Onboarding {
+class _$OnboardingScreen extends OnboardingScreen {
   @override
   final bool isOnboardingRequestRunning;
   @override
   final String onboardingRequestErrorMessage;
 
-  factory _$Onboarding([void updates(OnboardingBuilder b)]) =>
-      (new OnboardingBuilder()..update(updates)).build() as _$Onboarding;
+  factory _$OnboardingScreen([void updates(OnboardingScreenBuilder b)]) =>
+      (new OnboardingScreenBuilder()..update(updates)).build()
+          as _$OnboardingScreen;
 
-  _$Onboarding._(
+  _$OnboardingScreen._(
       {this.isOnboardingRequestRunning, this.onboardingRequestErrorMessage})
       : super._() {
     if (isOnboardingRequestRunning == null) {
       throw new BuiltValueNullFieldError(
-          'Onboarding', 'isOnboardingRequestRunning');
+          'OnboardingScreen', 'isOnboardingRequestRunning');
     }
   }
 
   @override
-  Onboarding rebuild(void updates(OnboardingBuilder b)) =>
+  OnboardingScreen rebuild(void updates(OnboardingScreenBuilder b)) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  _$OnboardingBuilder toBuilder() => new _$OnboardingBuilder()..replace(this);
+  _$OnboardingScreenBuilder toBuilder() =>
+      new _$OnboardingScreenBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Onboarding &&
+    return other is OnboardingScreen &&
         isOnboardingRequestRunning == other.isOnboardingRequestRunning &&
         onboardingRequestErrorMessage == other.onboardingRequestErrorMessage;
   }
@@ -112,15 +116,15 @@ class _$Onboarding extends Onboarding {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Onboarding')
+    return (newBuiltValueToStringHelper('OnboardingScreen')
           ..add('isOnboardingRequestRunning', isOnboardingRequestRunning)
           ..add('onboardingRequestErrorMessage', onboardingRequestErrorMessage))
         .toString();
   }
 }
 
-class _$OnboardingBuilder extends OnboardingBuilder {
-  _$Onboarding _$v;
+class _$OnboardingScreenBuilder extends OnboardingScreenBuilder {
+  _$OnboardingScreen _$v;
 
   @override
   bool get isOnboardingRequestRunning {
@@ -146,9 +150,9 @@ class _$OnboardingBuilder extends OnboardingBuilder {
     super.onboardingRequestErrorMessage = onboardingRequestErrorMessage;
   }
 
-  _$OnboardingBuilder() : super._();
+  _$OnboardingScreenBuilder() : super._();
 
-  OnboardingBuilder get _$this {
+  OnboardingScreenBuilder get _$this {
     if (_$v != null) {
       super.isOnboardingRequestRunning = _$v.isOnboardingRequestRunning;
       super.onboardingRequestErrorMessage = _$v.onboardingRequestErrorMessage;
@@ -158,22 +162,22 @@ class _$OnboardingBuilder extends OnboardingBuilder {
   }
 
   @override
-  void replace(Onboarding other) {
+  void replace(OnboardingScreen other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$Onboarding;
+    _$v = other as _$OnboardingScreen;
   }
 
   @override
-  void update(void updates(OnboardingBuilder b)) {
+  void update(void updates(OnboardingScreenBuilder b)) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$Onboarding build() {
+  _$OnboardingScreen build() {
     final _$result = _$v ??
-        new _$Onboarding._(
+        new _$OnboardingScreen._(
             isOnboardingRequestRunning: isOnboardingRequestRunning,
             onboardingRequestErrorMessage: onboardingRequestErrorMessage);
     replace(_$result);

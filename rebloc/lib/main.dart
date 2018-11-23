@@ -66,6 +66,7 @@ class BetterYunarApp extends StatelessWidget {
           primaryColor: Color.fromARGB(255, 76, 81, 208),
         ),
         onGenerateRoute: _onGenerateRoute,
+        navigatorKey: navigatorKey,
         navigatorObservers: [navBloc.observer],
       ),
     );

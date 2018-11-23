@@ -1,0 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:better_yunar/models/loyaltyCard.dart';
+import 'package:better_yunar/widgets/LoyaltyCard.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    final LoyaltyCardBuilder builder = LoyaltyCardBuilder();
+    builder.name='Payback';
+    builder.cardId='54321';
+    builder.cardNumber='12345';
+    final LoyaltyCard loyaltyCard = builder.build();
+
+    await tester.pumpWidget(MaterialApp(home: LoyaltyCardWidget(loyaltyCard)));
+
+    expect(find.text('Payback'), findsOneWidget);
+    expect(find.text('12345'), findsOneWidget);
+    expect(find.text('ZEIG MIR MEHR JUNGE'), findsOneWidget);
+  });
+}

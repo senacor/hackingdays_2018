@@ -39,9 +39,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       serializers.serialize(object.achievements,
           specifiedType: const FullType(BuiltMap,
               const [const FullType(String), const FullType(Achievement)])),
-      'onboarding',
-      serializers.serialize(object.onboarding,
-          specifiedType: const FullType(Onboarding)),
+      'onboardingScreen',
+      serializers.serialize(object.onboardingScreen,
+          specifiedType: const FullType(OnboardingScreen)),
     ];
     if (object.user != null) {
       result
@@ -79,12 +79,13 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
               ])) as BuiltMap);
           break;
         case 'user':
-          result.user.replace(serializers.deserialize(value,
-              specifiedType: const FullType(User)) as User);
+          result.user = serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User;
           break;
-        case 'onboarding':
-          result.onboarding.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Onboarding)) as Onboarding);
+        case 'onboardingScreen':
+          result.onboardingScreen.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(OnboardingScreen))
+              as OnboardingScreen);
           break;
       }
     }
@@ -101,13 +102,13 @@ class _$AppState extends AppState {
   @override
   final User user;
   @override
-  final Onboarding onboarding;
+  final OnboardingScreen onboardingScreen;
 
   factory _$AppState([void updates(AppStateBuilder b)]) =>
       (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {this.loyaltyCards, this.achievements, this.user, this.onboarding})
+      {this.loyaltyCards, this.achievements, this.user, this.onboardingScreen})
       : super._() {
     if (loyaltyCards == null) {
       throw new BuiltValueNullFieldError('AppState', 'loyaltyCards');
@@ -115,8 +116,8 @@ class _$AppState extends AppState {
     if (achievements == null) {
       throw new BuiltValueNullFieldError('AppState', 'achievements');
     }
-    if (onboarding == null) {
-      throw new BuiltValueNullFieldError('AppState', 'onboarding');
+    if (onboardingScreen == null) {
+      throw new BuiltValueNullFieldError('AppState', 'onboardingScreen');
     }
   }
 
@@ -134,7 +135,7 @@ class _$AppState extends AppState {
         loyaltyCards == other.loyaltyCards &&
         achievements == other.achievements &&
         user == other.user &&
-        onboarding == other.onboarding;
+        onboardingScreen == other.onboardingScreen;
   }
 
   @override
@@ -142,7 +143,7 @@ class _$AppState extends AppState {
     return $jf($jc(
         $jc($jc($jc(0, loyaltyCards.hashCode), achievements.hashCode),
             user.hashCode),
-        onboarding.hashCode));
+        onboardingScreen.hashCode));
   }
 
   @override
@@ -151,7 +152,7 @@ class _$AppState extends AppState {
           ..add('loyaltyCards', loyaltyCards)
           ..add('achievements', achievements)
           ..add('user', user)
-          ..add('onboarding', onboarding))
+          ..add('onboardingScreen', onboardingScreen))
         .toString();
   }
 }
@@ -171,15 +172,15 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set achievements(MapBuilder<String, Achievement> achievements) =>
       _$this._achievements = achievements;
 
-  UserBuilder _user;
-  UserBuilder get user => _$this._user ??= new UserBuilder();
-  set user(UserBuilder user) => _$this._user = user;
+  User _user;
+  User get user => _$this._user;
+  set user(User user) => _$this._user = user;
 
-  OnboardingBuilder _onboarding;
-  OnboardingBuilder get onboarding =>
-      _$this._onboarding ??= new OnboardingBuilder();
-  set onboarding(OnboardingBuilder onboarding) =>
-      _$this._onboarding = onboarding;
+  OnboardingScreenBuilder _onboardingScreen;
+  OnboardingScreenBuilder get onboardingScreen =>
+      _$this._onboardingScreen ??= new OnboardingScreenBuilder();
+  set onboardingScreen(OnboardingScreenBuilder onboardingScreen) =>
+      _$this._onboardingScreen = onboardingScreen;
 
   AppStateBuilder();
 
@@ -187,8 +188,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if (_$v != null) {
       _loyaltyCards = _$v.loyaltyCards?.toBuilder();
       _achievements = _$v.achievements?.toBuilder();
-      _user = _$v.user?.toBuilder();
-      _onboarding = _$v.onboarding?.toBuilder();
+      _user = _$v.user;
+      _onboardingScreen = _$v.onboardingScreen?.toBuilder();
       _$v = null;
     }
     return this;
@@ -215,8 +216,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               loyaltyCards: loyaltyCards.build(),
               achievements: achievements.build(),
-              user: _user?.build(),
-              onboarding: onboarding.build());
+              user: user,
+              onboardingScreen: onboardingScreen.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -224,10 +225,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         loyaltyCards.build();
         _$failedField = 'achievements';
         achievements.build();
-        _$failedField = 'user';
-        _user?.build();
-        _$failedField = 'onboarding';
-        onboarding.build();
+
+        _$failedField = 'onboardingScreen';
+        onboardingScreen.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());
