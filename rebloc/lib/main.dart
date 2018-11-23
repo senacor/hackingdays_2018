@@ -7,8 +7,9 @@ import 'package:better_yunar/bloc/navigation_bloc.dart';
 import 'package:better_yunar/screens/splash_screen.dart';
 import 'package:better_yunar/screens/onboarding_screen.dart';
 import 'package:better_yunar/bloc/blocs.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'BetterPopupRoute.dart';
+import 'screens/achievementDetails.dart';
 import 'screens/mainScreen.dart';
 
 void main() => runApp(BetterYunarApp());
@@ -34,12 +35,19 @@ class BetterYunarApp extends StatelessWidget {
     store.dispatcher(RefreshLoyaltyCardsAction());
   }
 
-  MaterialPageRoute _onGenerateRoute(RouteSettings settings) {
+  Route _onGenerateRoute(RouteSettings settings) {
     var path = settings.name.split('/');
 
     if (path[1] == 'mainScreen') {
       return new MaterialPageRoute<int>(
         builder: (context) => MainScreen(),
+        settings: settings,
+      );
+    }
+
+    if (path[1] == 'achievements') {
+      return new BetterPopupRoute<int>(
+        builder: (context) => new AchievementDetails(achievementId: path[2]),
         settings: settings,
       );
     }
