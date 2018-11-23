@@ -144,6 +144,6 @@ class WebClient {
     final paybackProgramId = "b2bde17c-2476-4507-b506-7a5b5d0552e3";
     body['loyaltyProgramId'] = paybackProgramId;
     body['cardNumber'] = cardNumber;
-    return body;
+    return json.encode(body);
   }
 }
