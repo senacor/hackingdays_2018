@@ -18,7 +18,7 @@ class WebClient {
   final authorizationEndpoint = Uri.parse("https://api.dev1.thatisnomoon.io/auth/token");
   final loyaltyCardsUrl = Uri.parse("https://api.dev1.thatisnomoon.io/loyalty/cards");
   static const apiKey = "a524ae84-c799-4975-8ab1-9b07b5a28922";
-  static const headers = { "x-api-key": apiKey };
+  static const headers = { "x-api-key": apiKey, 'Content-type': 'application/json' };
   static const _requestTimeoutDuration = Duration(seconds: 10);
   static const maxAttempts = 3;
 
@@ -87,7 +87,7 @@ class WebClient {
     } while (response.statusCode == 500 && attempts < maxAttempts);
 
     if (response.statusCode != 201) {
-      final msg = 'Failed to fetch cards, status: ${response.statusCode}';
+      final msg = 'Failed to onboard user, status: ${response.statusCode}';
       throw Exception(msg);
     }
 
