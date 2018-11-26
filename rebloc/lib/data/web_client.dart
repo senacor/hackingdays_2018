@@ -124,8 +124,8 @@ class WebClient {
     return deserialized;
   }
 
-  Future<LoyaltyCard> addLoyaltyCard(cardNumber) async {
-    var response = await client.post(loyaltyCardsUrl, headers: headers, body: _createBody(cardNumber));
+  Future<LoyaltyCard> addLoyaltyCard(cardNumber, programId) async {
+    var response = await client.post(loyaltyCardsUrl, headers: headers, body: _createBody(cardNumber, programId));
     if(response.statusCode != 200) {
       throw 'Could not add card - Status: ${response.statusCode}';
     }
@@ -139,10 +139,9 @@ class WebClient {
     return deserialized;
   }
 
-  _createBody (cardNumber) {
+  _createBody (cardNumber, programId) {
     final body = <String, String>{};
-    final paybackProgramId = "b2bde17c-2476-4507-b506-7a5b5d0552e3";
-    body['loyaltyProgramId'] = paybackProgramId;
+    body['loyaltyProgramId'] = programId;
     body['cardNumber'] = cardNumber;
     return json.encode(body);
   }

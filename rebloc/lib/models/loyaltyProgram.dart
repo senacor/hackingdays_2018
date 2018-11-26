@@ -1,9 +1,13 @@
 class LoyaltyProgram {
   final String name;
-  final String id;
+  final String programId;
+  final String backgroundColor;
+  final String textColor;
 
   LoyaltyProgram({
     this.name,
-    this.id,
+    this.programId,
+    this.backgroundColor,
+    this.textColor,
   });
 }

@@ -5,6 +5,7 @@ import 'package:better_yunar/models/app_state.dart';
 import 'package:rebloc/rebloc.dart';
 import 'package:better_yunar/models/loyaltyCard.dart';
 import 'package:better_yunar/utils/logger.dart';
+import 'package:better_yunar/screens/addCardScreen.dart';
 
 class LoyaltyCardListViewModel {
   final List<LoyaltyCard> loyaltyCards;
@@ -50,6 +51,10 @@ class _LoyaltyCardListScreenState extends State<LoyaltyCardListScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddCardScreen()),
+                );
            Navigator.of(context).pushReplacementNamed('/addLoyaltyCard');
         },
         tooltip: 'Increment',

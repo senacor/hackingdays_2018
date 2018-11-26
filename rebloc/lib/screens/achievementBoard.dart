@@ -12,7 +12,7 @@ String imageBasePath() {
       "/";
 }
 
-typedef AchievementTapCallback = void Function(Achievement achievement);
+typedef AchievementTapCallback = void Function(BuildContext context, Achievement achievement);
 
 class AchievementListViewModel {
   final List<Achievement> achievements;
@@ -74,8 +74,9 @@ List<Widget> _buildGridTileList(List<Achievement> achievements) {
   return achievements.map<Widget>((Achievement achievement) {
     return AchievementGridItem(
         achievement: achievement,
-        onTap: (Achievement achievement) {
-          // TODO open detail
+        onTap: (BuildContext context, Achievement achievement) {
+          log.info("trigger modal dialog");
+          Navigator.pushNamed(context, "/achievements/"+achievement.id);
         }
     );
   }).toList();
@@ -112,7 +113,7 @@ class AchievementGridItem extends StatelessWidget {
     return GridTile(
         child: GestureDetector(
             onTap: () {
-              onTap(achievement);
+              onTap(context, achievement);
             },
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
