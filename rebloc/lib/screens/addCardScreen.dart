@@ -10,9 +10,12 @@ import 'package:better_yunar/utils/showError.dart';
 import 'package:better_yunar/data/web_client.dart';
 import 'dart:async';
 import 'package:better_yunar/models/loyaltyProgram.dart';
+import 'package:better_yunar/bloc/loyaltyProgram_bloc.dart';
 import 'package:better_yunar/data/loyaltyProgram_repository.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+class LoyaltyProgramListViewModel {}
 
 class AddCardScreen extends StatelessWidget {
   final LoyaltyProgramRepository repository = LoyaltyProgramRepository();
@@ -68,26 +71,34 @@ class AddCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('Programs'),
-        ),
-        body: ViewModelSubscriber<AppState, LoyaltyCardListViewModel>(
-            converter: (state) => LoyaltyCardListViewModel(state),
-            builder: (context, dispatcher, viewModel) => Center(
-                  child: FutureBuilder<List<LoyaltyProgram>>(
-                    future: repository.loadPrograms(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<List<LoyaltyProgram>> snapshot) {
-                      if (!snapshot.hasData)
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      return ListView(
-                        children: _create(snapshot.data, context, dispatcher),
+      appBar: new AppBar(
+        title: new Text('Programs'),
+      ),
+      body: ViewModelSubscriber<AppState, LoyaltyProgramListViewModel>(
+        converter: (_) => LoyaltyProgramListViewModel(),
+        builder: (context, dispatcher, viewModel) => RefreshIndicator(
+              onRefresh: () {
+                dispatcher(RefreshLoyaltyProgramAction());
+                return Future.delayed(Duration(seconds: 1), () {});
+              },
+              child: Center(
+                child: FutureBuilder<List<LoyaltyProgram>>(
+                  future: repository.loadPrograms(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<LoyaltyProgram>> snapshot) {
+                    if (!snapshot.hasData)
+                      return Center(
+                        child: CircularProgressIndicator(),
                       );
-                    },
-                  ),
-                )));
+                    return ListView(
+                      children: _create(snapshot.data, context, dispatcher),
+                    );
+                  },
+                ),
+              ),
+            ),
+      ),
+    );
   }
 
   Future _scan(context, dispatcher, programId) async {
